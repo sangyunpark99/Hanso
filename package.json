@@ -4,6 +4,7 @@
   "description": "한기대 한식 알림 챗봇",
   "main": "index.js",
   "scripts": {
+    "build": "build server.js",
     "start": "pm2 start server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
