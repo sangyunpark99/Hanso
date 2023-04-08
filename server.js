@@ -19,6 +19,22 @@ if (fs.ReadStream(folderName)) {
 
 // GET menu
 app.use("/menu", menuRouter);
+app.post("/", (req, res) => {
+  const resJson = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          simpleText: {
+            text: "간단한 텍스트 요소입니다.",
+          },
+        },
+      ],
+    },
+  };
+
+  res.json(resJson);
+});
 
 app.listen("3000", () => {
   console.log("서버 실행중..");
