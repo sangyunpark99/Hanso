@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const path = require("path");
 
 const getImage = async () => {
   const browser = await puppeteer.launch();
@@ -15,6 +16,24 @@ const getImage = async () => {
   // 특정 태그를 선택 - 식단표 선택
   const elements = await page.$$("table");
   let screenshotElment;
+
+  const dirPath = path.join(__dirname, `../public/image`);
+
+  fs.readdir(dirPath, (err, files) => {
+    if (err) {
+      throw err;
+    }
+
+    if (files) {
+      files.forEach((file) => {
+        fs.unlink(`${dirPath}/${file}`, (err) => {
+          if (err) {
+            throw err;
+          }
+        });
+      });
+    }
+  });
 
   elements.forEach((value, index) => {
     // 여러 Element를 순회하면서 학식 테이블만 선택

@@ -13,9 +13,7 @@ if (!fs.existsSync(folderName)) {
 }
 
 // image 폴더내에 사진 저장하기
-if (fs.ReadStream(folderName)) {
-  getImage();
-}
+getImage();
 
 // GET menu
 app.use("/menu", menuRouter);
