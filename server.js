@@ -19,7 +19,7 @@ if (fs.ReadStream(folderName)) {
 
 // GET menu
 app.use("/menu", menuRouter);
-app.post("/", (req, res) => {
+app.use("/", (req, res) => {
   const resJson = {
     version: "2.0",
     template: {
@@ -37,5 +37,5 @@ app.post("/", (req, res) => {
 });
 
 app.listen("3000", () => {
-  console.log("서버 실행중..");
+  console.log("서버 실행중..!");
 });
