@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
+const env = require("dotenv");
+
+env.config();
 
 const getImage = require("../utils/getImage");
-const getAddress = require("../utils/getIp");
 
 // GET /menu 요청에 대한 응답 함수
 router.get("/", (req, res) => {
@@ -26,9 +28,11 @@ router.get("/", (req, res) => {
       getImage();
     }
 
-    const ipAddress = getAddress();
-
-    res.status(200).json({ imageUrl: `http://${ipAddress}:3000/${imageName}` });
+    res
+      .status(200)
+      .json({
+        imageUrl: `http://${process.env.ADDRESS}:${process.env.PORT}/${imageName}`,
+      });
   } catch (e) {
     console.error(e.message);
     res.status(500).send("Server Error.");
