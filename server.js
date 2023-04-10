@@ -1,7 +1,10 @@
 const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const getImage = require("./utils/getImage");
 const menuRouter = require("./router/menuRouter");
+const schedule = require("node-schedule");
+const morgan = require("morgan");
 
 const folderName = "./public/image";
 const app = express();
@@ -12,10 +15,16 @@ if (!fs.existsSync(folderName)) {
   console.log(`${folderName} 생성!`);
 }
 
-// image 폴더내에 사진 저장하기
-getImage();
+const job = schedule.scheduleJob("0 15 * * *", () => {
+  getImage();
+  console.log("이미지가 갱신되었습니다!");
+});
 
-// GET menu
+const imagePath = path.join(__dirname, "public", "image");
+
+app.use(express.static(imagePath));
+app.use(morgan("dev"));
+
 app.use("/menu", menuRouter);
 app.use("/", (req, res) => {
   const resJson = {

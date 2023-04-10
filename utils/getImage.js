@@ -25,6 +25,7 @@ const getImage = async () => {
     }
 
     if (files) {
+      // 기존에 존재하던 파일 삭제
       files.forEach((file) => {
         fs.unlink(`${dirPath}/${file}`, (err) => {
           if (err) {
