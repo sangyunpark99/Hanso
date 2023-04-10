@@ -4,9 +4,9 @@
   "description": "한기대 한식 알림 챗봇",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "stop": "pm2 stop server.js",
-    "start": "pm2 start server.js",
+    "dev": "nodemon web.js",
+    "stop": "pm2 stop web.js",
+    "start": "pm2 start web.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

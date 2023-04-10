@@ -43,6 +43,6 @@ app.use("/", (req, res) => {
   res.json(resJson);
 });
 
-app.listen("3000", () => {
+app.listen("8001", () => {
   console.log("서버 실행중..!");
 });
