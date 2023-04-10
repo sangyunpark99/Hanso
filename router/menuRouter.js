@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const getImage = require("../utils/getImage");
 const fs = require("fs");
 const path = require("path");
+
+const getImage = require("../utils/getImage");
+const getAddress = require("../utils/getIp");
 
 // GET /menu 요청에 대한 응답 함수
 router.get("/", (req, res) => {
@@ -24,7 +26,9 @@ router.get("/", (req, res) => {
       getImage();
     }
 
-    res.status(200).json({ imageUrl: `http://localhost:3000/${imageName}` });
+    const ipAddress = getAddress();
+
+    res.status(200).json({ imageUrl: `http://${ipAddress}:3000/${imageName}` });
   } catch (e) {
     console.error(e.message);
     res.status(500).send("Server Error.");
