@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
         outputs: [
           {
             simpleImage: {
-              imageUrl: `http://sangyun5108.cafe24app.com:8001/${imageName}`,
+              imageUrl: `http://sangyun5108.cafe24.com:8001/${imageName}`,
               altText: "학식입니다.",
             },
           },
