@@ -8,7 +8,7 @@ const morgan = require("morgan");
 
 const app = express();
 
-const job = schedule.scheduleJob("0 15 * * *", () => {
+const job = schedule.scheduleJob("10 * * * * *", () => {
   getImage();
   console.log("이미지가 갱신되었습니다!");
 });
