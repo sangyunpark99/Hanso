@@ -3,7 +3,10 @@ const fs = require("fs");
 const path = require("path");
 
 const getImage = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
   await page.goto("https://coop.koreatech.ac.kr/dining/menu.php");
 
@@ -47,18 +50,12 @@ const getImage = async () => {
   const screenshot = await screenshotElment.screenshot();
 
   // 이미지 파일로 저장
-  fs.writeFile(
-    `public/image/menu_${`${year}-${month.toString().padStart(2, "0")}-${day
-      .toString()
-      .padStart(2, "0")}`}.png`,
-    screenshot,
-    (err) => {
-      if (err) {
-        throw err;
-      }
-      console.log("학교 식단 사진이 저장되었습니다");
+  fs.writeFile(`public/image/menu.png`, screenshot, (err) => {
+    if (err) {
+      throw err;
     }
-  );
+    console.log("학교 식단 사진이 저장되었습니다");
+  });
 
   await browser.close();
 };
